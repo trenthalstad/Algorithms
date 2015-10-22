@@ -1,10 +1,12 @@
 # Algorithms
 <br>
 Project requirements for Data structures project<br>
-Shell sort<br>
-Quick sort<br>
-Partition<br>
-bubble sort<br>
+<ul>
+<li>Shell sort</li><br>
+<li>Quick sort</li><br>
+<li>Partition</li><br>
+<li>bubble sort</li><br>
+</u>
 <br><hr><br>
 have a set number of data items<br>
 built in sizes available<br>
