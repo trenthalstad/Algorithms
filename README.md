@@ -1,13 +1,17 @@
 # Algorithms
 <br>
 Project requirements for Data structures project<br>
-Shell sort
-Quick sort
-Partition
-bubble sort
-
-have a set number of data items, built in sizes available, random sizes available as well.
-
-need to scramble every time, also set largest to highest so we can watch them sort.
+Shell sort<br>
+Quick sort<br>
+Partition<br>
+bubble sort<br>
+<br><hr><br>
+have a set number of data items<br>
+built in sizes available<br>
+random sizes available as well.<br>
+<br><hr><br>
+need to scramble every time<br>
+also set largest to highest so we can watch them sort.<br>
+<br><hr><br>
 
 Code Comment Guy - Deff
