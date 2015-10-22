@@ -1,6 +1,6 @@
 # Algorithms
-
-Project requirements for Data structures project
+<br>
+Project requirements for Data structures project<br>
 Shell sort
 Quick sort
 Partition
