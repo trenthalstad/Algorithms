@@ -6,14 +6,18 @@ Project requirements for Data structures project<br>
 <li>Quick sort</li><br>
 <li>Partition</li><br>
 <li>bubble sort</li><br>
-</u>
+</ul>
 <br><hr><br>
-have a set number of data items<br>
-built in sizes available<br>
-random sizes available as well.<br>
+<ul>
+<li>have a set number of data items</li><br>
+<li>built in sizes available</li><br>
+<li>random sizes available as well.</li><br>
+</ul>
 <br><hr><br>
-need to scramble every time<br>
-also set largest to highest so we can watch them sort.<br>
+<ul>
+<li>need to scramble every time</li><br>
+<li>also set largest to highest so we can watch them sort.</li><br>
+</ul>
 <br><hr><br>
 
 Code Comment Guy - Deff
