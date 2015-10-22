@@ -52,7 +52,7 @@ Project requirements for Data structures project<br>
   <p >Seth</p>
   </td>
   <td >
-  <p >Randall</p>
+  <p >Deff</p>
   </td>
  </tr>
  <tr>
