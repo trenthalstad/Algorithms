@@ -477,6 +477,16 @@ public class Shell extends javax.swing.JFrame {
             }
         }
         
+        private void setColorSequentially(){
+            colors = new Color[data.length];
+            //int max = MathUtils.getMax(data);
+            //int min = MathUtils.getMin(data);
+            //for(int i = 0; i < data.length; i++){
+            //int color = scale((data[i]-min)/(max-min), 0f, 1f, 0x000000, 0xFFFFFF);
+            //    colors[i] = new Color((color & 0xFF0000)/(float)0xFF0000*255f, (color & 0x00FF00)/(float)0x00FF00*255f, (color & 0x0000FF)/(float)0x0000FF*255f);
+            //}
+        }
+        
         @Override
         public void paint(Graphics gfx){
             Graphics2D g = (Graphics2D)gfx;
@@ -487,7 +497,7 @@ public class Shell extends javax.swing.JFrame {
             if(data != null && colors != null)
                 for(int i = 0; i < data.length; i++){
                     g.setColor(colors[i]);
-                    g.fill3DRect((int)(i*800f/data.length), 672, (int)(800f/data.length), -data[i], true);
+                    g.fill3DRect((int)(i*800f/data.length), 672-data[i], (int)(800f/data.length), 672, true);
                 }
             g.setColor(Color.yellow);
             for(int i = 0; i <= 6; i++){
@@ -497,7 +507,6 @@ public class Shell extends javax.swing.JFrame {
             g.drawLine(0, mouseY, 800, mouseY);
             g.drawLine(mouseX, 0, mouseX, 700);
         }
-        
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
