@@ -10,4 +10,8 @@ public class MathUtils {
         return value < min ? min : value > max ? max : value;
     }
     
+    public static float scale(float value, float min, float max, float newMin, float newMax){
+        return value/(max-min)*(newMax-newMix);
+    }
+    
 }
