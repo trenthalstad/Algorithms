@@ -1,5 +1,5 @@
 
-package com.eaglebytes;
+package com.eaglebytes.sorting;
 
 public class BubbleSort extends javax.swing.JFrame {
 
