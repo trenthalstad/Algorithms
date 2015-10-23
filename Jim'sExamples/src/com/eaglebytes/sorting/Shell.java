@@ -456,10 +456,21 @@ public class Shell extends javax.swing.JFrame {
 //            }
             
             //Two Color Choices
-            setColor();
-//            setBlackAndWhite();
+//            setColor();
+//            setSequentialColor();
+            setBlackAndWhite();
             
             repaint();
+        }
+        
+        private void setSequentialColor(){
+            int max = MathUtils.getMaxIndex(data);
+            colors = new Color[data.length];
+            for(int i = 0; i < data.length; i++){
+                int color = (int)MathUtils.scale((float)data[i]/(float)max, 0f, 1f, (float)0x000000, (float)0xFFFFFF);
+                System.out.println((color & 0xFF0000)/0xFF0000*255);
+                colors[i] = new Color((int)((color & 0xFF0000)/(float)0xFF0000*255), (int)((color & 0x00FF00)/(float)0x00FF00*255), (int)((color & 0x0000FF)/(float)0x0000FF*255));
+            }
         }
         
         private void setBlackAndWhite(){
