@@ -115,7 +115,7 @@ Project requirements for Data structures project<br>
 </table>
 
 
-
-Code Comment Guy - Deff
-
+<hr>
+Code Comment Guy - Deff<br>
+Code Reviwerer Guy - Trent :)
 
