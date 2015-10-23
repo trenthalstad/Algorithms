@@ -487,7 +487,7 @@ public class Shell extends javax.swing.JFrame {
             if(data != null && colors != null)
                 for(int i = 0; i < data.length; i++){
                     g.setColor(colors[i]);
-                    g.fill3DRect((int)(i*800f/data.length), 672, (int)(800f/data.length), -data[i], true);
+                    g.fill3DRect((int)(i*800f/data.length), 672-data[i], (int)(800f/data.length), 672, true);
                 }
             g.setColor(Color.yellow);
             for(int i = 0; i <= 6; i++){
@@ -497,7 +497,6 @@ public class Shell extends javax.swing.JFrame {
             g.drawLine(0, mouseY, 800, mouseY);
             g.drawLine(mouseX, 0, mouseX, 700);
         }
-        
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
