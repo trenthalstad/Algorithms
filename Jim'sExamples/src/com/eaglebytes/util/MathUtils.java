@@ -14,4 +14,20 @@ public class MathUtils {
         return value/(max-min)*(newMax-newMix);
     }
     
+    public int getMin(int[] arr){
+        int temp = Integer.MAX_VALUE;
+        for(int i : arr)
+            if(temp < i)
+                temp = i;
+        return temp;
+    }
+    
+    public int getMax(int[] arr){
+        int temp = 0;
+        for(int i : arr)
+            if(temp > i)
+                temp = i;
+        return temp;
+    }
+    
 }
