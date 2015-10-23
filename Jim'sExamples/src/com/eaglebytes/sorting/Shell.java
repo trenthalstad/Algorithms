@@ -477,6 +477,16 @@ public class Shell extends javax.swing.JFrame {
             }
         }
         
+        private void setColorSequentially(){
+            colors = new Color[data.length];
+            //int max = MathUtils.getMax(data);
+            //int min = MathUtils.getMin(data);
+            //for(int i = 0; i < data.length; i++){
+            //int color = scale((data[i]-min)/(max-min), 0f, 1f, 0x000000, 0xFFFFFF);
+            //    colors[i] = new Color((color & 0xFF0000)/(float)0xFF0000*255f, (color & 0x00FF00)/(float)0x00FF00*255f, (color & 0x0000FF)/(float)0x0000FF*255f);
+            //}
+        }
+        
         @Override
         public void paint(Graphics gfx){
             Graphics2D g = (Graphics2D)gfx;
