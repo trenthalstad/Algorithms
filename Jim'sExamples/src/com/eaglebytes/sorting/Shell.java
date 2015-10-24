@@ -1,24 +1,32 @@
 package com.eaglebytes.sorting;
 
 import com.eaglebytes.util.MathUtils;
+import com.eaglebytes.util.Vector2f;
 import java.awt.Color;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class Shell extends javax.swing.JFrame {
 
-    public int[] data;
-    
+    private int[] data;
+
     public Shell() {
         initComponents();
         setLocationRelativeTo(null);
-        ((Panel)renderPanel).preInit();
-//        generateButton.doClick();
+        ((Panel) renderPanel).preInit();
+        sequentialButton.doClick();
     }
 
     @SuppressWarnings("unchecked")
@@ -307,80 +315,78 @@ public class Shell extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
-        try{
+        try {
             int indices = Integer.parseInt(elementsField.getText());
             data = new int[indices];
-            for(int i = 0; i < indices; i++){
-                data[i] = (int)(Math.random()*(maxValueSlider.getValue()-minValueSlider.getValue())+minValueSlider.getValue());
-            }
-            ((Panel)renderPanel).data = data;
-            ((Panel)renderPanel).init();
-        }catch(Exception e){
+            for (int i = 0; i < indices; i++)
+                data[i] = (int) (Math.random() * (maxValueSlider.getValue() - minValueSlider.getValue()) + minValueSlider.getValue());
+            ((Panel) renderPanel).data = data;
+            ((Panel) renderPanel).init();
+        } catch (Exception e) {
             System.err.println(e);
         }
     }//GEN-LAST:event_generateButtonActionPerformed
 
     private void maxValueSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_maxValueSliderStateChanged
-        if(minValueSlider.getValue() > maxValueSlider.getValue()-1)
-            minValueSlider.setValue(maxValueSlider.getValue()-1);
-        if(maxValueSlider.getValue() == 0)
+        if (minValueSlider.getValue() > maxValueSlider.getValue() - 1)
+            minValueSlider.setValue(maxValueSlider.getValue() - 1);
+        if (maxValueSlider.getValue() == 0)
             maxValueSlider.setValue(1);
         maxTextField.setText("" + maxValueSlider.getValue());
     }//GEN-LAST:event_maxValueSliderStateChanged
 
     private void minValueSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_minValueSliderStateChanged
-        if(maxValueSlider.getValue() < minValueSlider.getValue()+1)
-            maxValueSlider.setValue(minValueSlider.getValue()+1);
-        if(minValueSlider.getValue() == 600)
+        if (maxValueSlider.getValue() < minValueSlider.getValue() + 1)
+            maxValueSlider.setValue(minValueSlider.getValue() + 1);
+        if (minValueSlider.getValue() == 600)
             minValueSlider.setValue(599);
         minTextField.setText("" + minValueSlider.getValue());
     }//GEN-LAST:event_minValueSliderStateChanged
 
     private void minTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_minTextFieldKeyReleased
-        try{
-            if(!minTextField.getText().matches("800|[0-7][0-9][0-9]|[0-9][0-9]|[0-9]"))
-                minTextField.setText(minTextField.getText().substring(0, minTextField.getText().length()-1));
+        try {
+            if (!minTextField.getText().matches("800|[0-7][0-9][0-9]|[0-9][0-9]|[0-9]"))
+                minTextField.setText(minTextField.getText().substring(0, minTextField.getText().length() - 1));
             minValueSlider.setValue(Integer.parseInt(minTextField.getText()));
-        }catch(Exception e){
+        } catch (Exception e) {
             System.err.println(e);
         }
     }//GEN-LAST:event_minTextFieldKeyReleased
 
     private void maxTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_maxTextFieldKeyReleased
-        try{
-            if(!maxTextField.getText().matches("800|[0-7][0-9][0-9]|[0-9][0-9]|[0-9]"))
-                maxTextField.setText(maxTextField.getText().substring(0, maxTextField.getText().length()-1));
+        try {
+            if (!maxTextField.getText().matches("800|[0-7][0-9][0-9]|[0-9][0-9]|[0-9]"))
+                maxTextField.setText(maxTextField.getText().substring(0, maxTextField.getText().length() - 1));
             maxValueSlider.setValue(Integer.parseInt(maxTextField.getText()));
-        }catch(Exception e){
+        } catch (Exception e) {
             System.err.println(e);
         }
     }//GEN-LAST:event_maxTextFieldKeyReleased
 
     private void elementsFieldMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_elementsFieldMousePressed
-        if(elementsField.getText().matches(""))
+        if (elementsField.getText().matches(""))
             elementsField.setText("");
     }//GEN-LAST:event_elementsFieldMousePressed
 
     private void sequentialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sequentialButtonActionPerformed
-        try{
+        try {
             int indices = Integer.parseInt(elementsField.getText());
             data = new int[indices];
-            for(int i = 0; i < indices; i++){
-                data[i] = (int)((float)i*(maxValueSlider.getValue()-minValueSlider.getValue())/(indices-1)+minValueSlider.getValue());
-            }
-            ((Panel)renderPanel).data = data;
-            ((Panel)renderPanel).init();
-        }catch(Exception e){
+            for (int i = 0; i < indices; i++)
+                data[i] = (int) ((float) i * (maxValueSlider.getValue() - minValueSlider.getValue()) / (indices - 1) + minValueSlider.getValue());
+            ((Panel) renderPanel).data = data;
+            ((Panel) renderPanel).init();
+        } catch (Exception e) {
             System.err.println(e);
         }
     }//GEN-LAST:event_sequentialButtonActionPerformed
 
     private void elementsFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_elementsFieldKeyReleased
-        try{
-            if(!elementsField.getText().matches("800|[0-7][0-9][0-9]|[0-9][0-9]|[0-9]"))
-                elementsField.setText(elementsField.getText().substring(0, elementsField.getText().length()-1));
+        try {
+            if (!elementsField.getText().matches("800|[0-7][0-9][0-9]|[0-9][0-9]|[0-9]"))
+                elementsField.setText(elementsField.getText().substring(0, elementsField.getText().length() - 1));
             elementsSlider.setValue(Integer.parseInt(elementsField.getText()));
-        }catch(Exception e){
+        } catch (Exception e) {
             System.err.println(e);
         }
     }//GEN-LAST:event_elementsFieldKeyReleased
@@ -396,12 +402,11 @@ public class Shell extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
-            }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(Shell.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -420,95 +425,323 @@ public class Shell extends javax.swing.JFrame {
         });
     }
 
-    private class Panel extends JPanel{
-        
-        public int[] data;
-        public Color[] colors;
-        
+    private class Panel extends JPanel {
+
+        private int[] data;
+        private int[] selectedIndices = new int[]{-1, -1};
+        private Color[] colors;
+
         private BufferedImage img;
         private Graphics2D bg;
-        
-        public int mouseX, mouseY;
-        
-        public Panel(){
-            addMouseMotionListener(new MouseAdapter(){
-               @Override
-               public void mouseMoved(MouseEvent me){
-                   mouseX = me.getX();
-                   mouseY = me.getY();
-                   repaint();
-               }
+
+        private int mouseX, mouseY;
+        private int timerSpeed = 10;
+
+        public Panel() {
+            addMouseMotionListener(new MouseAdapter() {
+                @Override
+                public void mouseMoved(MouseEvent me) {
+                    mouseX = me.getX();
+                    mouseY = me.getY();
+                    repaint();
+                }
+            });
+            addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent me) {
+//                    int index = getDataIndexFromCoord(new Vector2f(me.getX(), me.getY()));
+//                    if(index != -1)
+//                        selectDataIndex(index);
+//                    if(me.getButton() == MouseEvent.BUTTON3){
+//                        //TODO: Slow down
+//                        //Note: The time here MUST match the time on the other timer.
+//                        new javax.swing.Timer(timerSpeed, new ActionListener(){
+//                            private int index = 0;
+//                            private boolean dir = false;
+//                            @Override
+//                            public void actionPerformed(ActionEvent ae){
+//                                selectDataIndex(index++);
+////                                selectDataIndex(data.length-index);
+//                                if(index > data.length-1)
+//                                    ((Timer)ae.getSource()).stop();
+//                            }
+//                        }).start();
+//                    }
+
+                    //example sort
+                    new Timer(100, new ActionListener() {
+                        int index = 0;
+
+                        @Override
+                        public void actionPerformed(ActionEvent ae) {
+                            if (index > data.length - 1)
+                                ((Timer) ae.getSource()).stop();
+                            for (int i = index; i < data.length - 1; i++)
+                                if (data[i] < data[i + 1])
+                                    if (data[i + 1] > data[index])
+                                        swapData(index, i + 1);
+                            index++;
+                        }
+                    }).start();
+                }
             });
         }
-        
-        public void preInit(){
-            img = new BufferedImage(800, 700, BufferedImage.TYPE_INT_ARGB);
-            bg = (Graphics2D)img.getGraphics();
+
+        /**
+         * Swaps the two indices in the array, ONLY IN THE DATA.
+         *
+         * @param index The first index to swap. Use -1 to take from temp.
+         * @param destination The second index to swap. Use -1 to put in temp.
+         */
+        public void swapData(int index, int destination) {
+            int temp = data[index];
+            data[index] = data[destination];
+            data[destination] = temp;
+            Color tempColor = colors[index];
+            colors[index] = colors[destination];
+            colors[destination] = tempColor;
         }
-        
-        public void init(){
-            //Doesn't work for some reason......
-//            bg.setColor(Color.black);
-//            bg.fillRect(0, 0, 800, 700);
-//            for(int i = 0; i < data.length; i++){
-//                bg.setColor(new Color((float)Math.random(), (float)Math.random(), (float)Math.random()));
-//                bg.fill3DRect((int)(i*800f/data.length), 672, (int)(800f/data.length), -data[i], true);
-//            }
-            
-            //Two Color Choices
-            setColor();
+
+        public void swap(final int index, final int destination) {
+            new Timer(20, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    Vector2f offset = dataOffset.get(index);
+                    Vector2f offset2 = dataOffset.get(destination);
+                    if (getCoordsFromDataIndex(index).x + offset.x > getCoordsFromDataIndex(destination).x - offset2.x) {
+                        offset.x -= 5f;
+                        offset2.x += 5f;
+                        if (getCoordsFromDataIndex(index).x + offset.x < getCoordsFromDataIndex(destination).x - offset2.x) {
+                            swapData(index, destination);
+                            dataOffset.get(index).x = 0;
+                            dataOffset.get(destination).x = 0;
+                            ((Timer) ae.getSource()).stop();
+                        }
+                    } else {
+                        offset.x += 5f;
+                        offset2.x -= 5f;
+                        if (getCoordsFromDataIndex(index).x - offset.x > getCoordsFromDataIndex(destination).x + offset2.x) {
+                            swapData(index, destination);
+                            dataOffset.get(index).x = 0;
+                            dataOffset.get(destination).x = 0;
+                            ((Timer) ae.getSource()).stop();
+                        }
+                    }
+                    repaint();
+                }
+            }).start();
+        }
+
+        private javax.swing.Timer animationTimer;
+
+        public void preInit() {
+            img = new BufferedImage(800, 672, BufferedImage.TYPE_INT_ARGB);
+            bg = (Graphics2D) img.getGraphics();
+            bg.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+//            bg.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);
+            bg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        }
+
+        private float speed = 3f;
+
+        public void init() {
+            dataOffset.clear();
+            for (int i : data)
+                dataOffset.add(new Vector2f(0, 0));
 //            setBlackAndWhite();
-            
+//            setColorSequentially();
+            setShadeSequentially();
+
+            animationTimer = new javax.swing.Timer(timerSpeed, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    for (int i = 0; i < data.length; i++)
+                        if (i == selectedIndices[0] || i == selectedIndices[1]) {
+                            //TODO: Slow down
+                            speed = 100f;
+                            Vector2f offset = dataOffset.get(i);
+                            if (offset.y > -200)
+                                dataOffset.get(i).y = offset.y - speed;
+                            repaint();
+                        } else {
+                            //TODO: Remove hard-coded descent speed
+                            speed = 10f;
+                            Vector2f offset = dataOffset.get(i);
+                            if (offset.y < 0)
+                                dataOffset.get(i).y = offset.y + speed;
+                            repaint();
+                        }
+                }
+            });
+            animationTimer.start();
             repaint();
         }
-        
-        private void setBlackAndWhite(){
+
+        private void setBlackAndWhite() {
             colors = new Color[data.length];
-            for(int i = 0; i < data.length; i++){
-                float colorValue = MathUtils.clamp((float)i/colors.length, 0.2f, 1);
+            for (int i = 0; i < data.length; i++) {
+                float colorValue = MathUtils.clamp((float) i / colors.length, 0.2f, 1);
                 colors[i] = new Color(colorValue, colorValue, colorValue);
             }
         }
-        
-        private void setColor(){
+
+        private void setColor() {
             colors = new Color[data.length];
-            for(int i = 0; i < data.length; i++){
-                colors[i] = new Color((float)Math.random(), (float)Math.random(), (float)Math.random());
+            for (int i = 0; i < data.length; i++)
+                colors[i] = new Color((float) Math.random(), (float) Math.random(), (float) Math.random());
+        }
+
+        private void setColorSequentially() {
+            colors = new Color[data.length];
+            int max = MathUtils.getMax(data);
+            int min = MathUtils.getMin(data);
+            for (int i = 0; i < data.length; i++) {
+                int color = (int) MathUtils.scale((data[i] - min) / (float) (max - min), 0f, 1f, 0x000000, 0xFFFFFF);
+                colors[i] = new Color((int) ((color & 0xFF0000) / (float) 0xFF0000 * 255f), (int) ((color & 0x00FF00) / (float) 0x00FF00 * 255f), (int) ((color & 0x0000FF) / (float) 0x0000FF * 255f));
             }
         }
-        
-        private void setColorSequentially(){
+
+        private void setShadeSequentially() {
             colors = new Color[data.length];
-            //int max = MathUtils.getMax(data);
-            //int min = MathUtils.getMin(data);
-            //for(int i = 0; i < data.length; i++){
-            //int color = scale((data[i]-min)/(max-min), 0f, 1f, 0x000000, 0xFFFFFF);
-            //    colors[i] = new Color((color & 0xFF0000)/(float)0xFF0000*255f, (color & 0x00FF00)/(float)0x00FF00*255f, (color & 0x0000FF)/(float)0x0000FF*255f);
-            //}
+            for (int i = 0; i < data.length; i++) {
+                int max = MathUtils.getMax(data);
+                int min = MathUtils.getMin(data);
+                float color = (float) (data[i] - min) / (max - min);
+                colors[i] = new Color(1 - color, color, color);
+            }
         }
-        
+
+        private List<Vector2f> dataOffset = new ArrayList<Vector2f>();
+        private boolean firstSelection = false;
+
+        public void selectDataIndex(int index) {
+            if (firstSelection = !firstSelection)
+                this.selectedIndices[0] = index;
+            else
+                this.selectedIndices[1] = index;
+
+//            if(selectedIndices[1] != -1){
+//                swap(selectedIndices[0], selectedIndices[1]);
+//                for(int i = 0; i < selectedIndices.length; i++)
+//                    selectedIndices[i] = -1;
+//            }
+            repaint();
+        }
+
+        public void unselectDataIndex() {
+//            this.selcetedIndex = -1;
+            repaint();
+        }
+
+        private int getDataIndexFromCoord(Vector2f coordinate) {
+            for (int i = 0; i < data.length; i++) {
+                int xPos = (int) (i * 800f / (9 / 8f * data.length)) + (int) dataOffset.get(i).x;
+                int yPos = 672 - data[i] + (int) dataOffset.get(i).y;
+                int width = (int) (800f / (9 / 8f * data.length));
+                int height = data[i];
+                if (coordinate.x > xPos && coordinate.x < xPos + width && coordinate.y > yPos && coordinate.y < yPos + height)
+                    return i;
+            }
+            return -1;
+        }
+
+        private Vector2f getCoordsFromDataIndex(int index) {
+            return new Vector2f((int) (index * 800f / (9 / 8f * data.length)) + (int) dataOffset.get(index).x, 672 - data[index] + (int) dataOffset.get(index).y);
+        }
+
         @Override
-        public void paint(Graphics gfx){
-            Graphics2D g = (Graphics2D)gfx;
+        public void paint(Graphics gfx) {
+            //Graphics Initialization
+            Graphics2D g = (Graphics2D) gfx;
             g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
             g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);
-            g.setColor(Color.black);
-            g.fillRect(0, 0, 1024, 720);
-            if(data != null && colors != null)
-                for(int i = 0; i < data.length; i++){
-                    g.setColor(colors[i]);
-                    g.fill3DRect((int)(i*800f/data.length), 672-data[i], (int)(800f/data.length), 672, true);
+            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            //Draw Elements onto a backbuffer
+            bg.setColor(Color.black);
+            bg.fillRect(0, 0, 800, 720);
+            bg.setColor(Color.DARK_GRAY);
+            bg.fillRect(710, 0, 800, 720);
+            if (data != null && colors != null) {
+                for (int i = 0; i < data.length; i++) {
+                    int xPos = (int) (i * 800f / (9 / 8f * data.length)) + (int) dataOffset.get(i).x;
+                    int yPos = 672 - data[i] + (int) dataOffset.get(i).y;
+                    int width = (int) (800f / (9 / 8f * data.length));
+                    int height = data[i];
+                    if (!(i == selectedIndices[0] && i == selectedIndices[1])) {
+                    }
+                    {
+                        bg.setColor(colors[i]);
+                        bg.fill3DRect(xPos, yPos + (int) dataOffset.get(i).y, width, height, true);
+                    }
                 }
-            g.setColor(Color.yellow);
-            for(int i = 0; i <= 6; i++){
-                g.drawString("" + (100*i), 20, 672-(i * 100));
+                for (int i = 0; i < data.length; i++) {
+                    int xPos = (int) (i * 800f / (9 / 8f * data.length)) + (int) dataOffset.get(i).x;
+                    int yPos = 672 - data[i] + (int) dataOffset.get(i).y;
+                    int width = (int) (800f / (9 / 8f * data.length));
+                    int height = data[i];
+                    if (i == selectedIndices[0]) {
+                        //Beam of light behind the data
+                        bg.setPaint(new GradientPaint(0, 0, new Color(255, 255, 100, 150), 0, 672, new Color(255, 255, 0, 100)));
+                        bg.fillPolygon(new int[]{
+                            xPos + (int) dataOffset.get(i).x,
+                            (int) (xPos + (int) dataOffset.get(i).x + width),
+                            (int) (xPos + (int) dataOffset.get(i).x + 3 / 2f * width),
+                            (int) (xPos + (int) dataOffset.get(i).x - 1 / 2f * width)
+                        }, new int[]{0, 0, 672, 672}, 4);
+
+                        //Data
+                        bg.setColor(colors[i]);
+                        bg.fill3DRect(xPos, yPos + (int) dataOffset.get(i).y, width, height, true);
+
+                        //Beam of light infront of the data
+                        bg.setPaint(new GradientPaint(0, 0, new Color(255, 255, 100, 100), 0, 672, new Color(255, 255, 0, 25)));
+                        bg.fillPolygon(new int[]{
+                            xPos + (int) dataOffset.get(i).x,
+                            (int) (xPos + (int) dataOffset.get(i).x + width),
+                            (int) (xPos + (int) dataOffset.get(i).x + 3 / 2f * width),
+                            (int) (xPos + (int) dataOffset.get(i).x - 1 / 2f * width)
+                        }, new int[]{0, 0, 672, 672}, 4);
+                    } else if (i == selectedIndices[1]) {
+                        //Beam of light behind the data
+                        bg.setPaint(new GradientPaint(0, 0, new Color(255, 0, 255, 150), 0, 672, new Color(0, 0, 255, 100)));
+                        bg.fillPolygon(new int[]{
+                            xPos + (int) dataOffset.get(i).x,
+                            (int) (xPos + (int) dataOffset.get(i).x + width),
+                            (int) (xPos + (int) dataOffset.get(i).x + 3 / 2f * width),
+                            (int) (xPos + (int) dataOffset.get(i).x - 1 / 2f * width)
+                        }, new int[]{0, 0, 672, 672}, 4);
+
+                        //Data
+                        bg.setColor(colors[i]);
+                        bg.fill3DRect(xPos, yPos, width, height, true);
+
+                        //Beam of light infront of the data
+                        bg.setPaint(new GradientPaint(0, 0, new Color(255, 0, 255, 100), 0, 672, new Color(0, 0, 255, 25)));
+                        bg.fillPolygon(new int[]{
+                            xPos + (int) dataOffset.get(i).x,
+                            (int) (xPos + (int) dataOffset.get(i).x + width),
+                            (int) (xPos + (int) dataOffset.get(i).x + 3 / 2f * width),
+                            (int) (xPos + (int) dataOffset.get(i).x - 1 / 2f * width)
+                        }, new int[]{0, 0, 672, 672}, 4);
+                    }
+                }
             }
+            //Draw the backbuffer to the screen
+            g.drawImage(img, 0, 0, this);
+            //Draw the y-coordinate text
+            g.setColor(Color.yellow);
+            for (int i = 0; i <= 6; i++)
+                g.drawString("" + (100 * i), 20, 672 - (i * 100));
+            g.drawString("Temp", 740, 20);
+            g.drawLine(710, 30, 800, 30);
+            //Draw the point intersection lines
             g.setColor(Color.pink);
             g.drawLine(0, mouseY, 800, mouseY);
             g.drawLine(mouseX, 0, mouseX, 700);
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel dataGenLabel;
     private javax.swing.JPanel dataGenPanel;
