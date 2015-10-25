@@ -546,7 +546,7 @@ public class Shell extends javax.swing.JFrame {
                     if (index > data.length - 1)
                         ((Timer) ae.getSource()).stop();
 //                    selectDataIndex(index);
-//                    selectDataIndex(index+1);//Show data selected as it runs through animation
+//                    selectDataIndex(index+1);
                     repaint();
                     for (int i = index; i < data.length - 1; i++){
                         if (data[i] < data[i + 1])
