@@ -536,9 +536,12 @@ public class Shell extends javax.swing.JFrame {
         }
 
         public int sortSpeed = 150;
+        Timer sortTimer;
         public void sort() {
             //example sort
-            new Timer(sortSpeed, new ActionListener() {
+            if(sortTimer !- null)
+                sortTimer.stop();
+            sortTimer = new Timer(sortSpeed, new ActionListener() {
                 int index = 0;
 
                 @Override
@@ -633,7 +636,8 @@ public class Shell extends javax.swing.JFrame {
 //            setBlackAndWhite();
 //            setColorSequentially();
             setShadeSequentially();
-
+            if(animationTimer != null)
+                animationTimer.stop();
             animationTimer = new javax.swing.Timer(timerSpeed, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
