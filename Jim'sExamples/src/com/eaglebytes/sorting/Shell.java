@@ -539,7 +539,7 @@ public class Shell extends javax.swing.JFrame {
         Timer sortTimer;
         public void sort() {
             //example sort
-            if(sortTimer !- null)
+            if(sortTimer != null)
                 sortTimer.stop();
             sortTimer = new Timer(sortSpeed, new ActionListener() {
                 int index = 0;
@@ -558,7 +558,8 @@ public class Shell extends javax.swing.JFrame {
                     }
                     index++;
                 }
-            }).start();
+            });
+            sortTimer.start();
         }
         
         private int index = 0;
