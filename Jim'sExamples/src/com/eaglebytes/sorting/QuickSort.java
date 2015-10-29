@@ -1,4 +1,4 @@
-//Seth is the best tho
+//Seth is the best tho!
 package com.eaglebytes.sorting;
 
 public class QuickSort implements Sort{
