@@ -558,7 +558,7 @@ public class Shell extends javax.swing.JFrame {
 
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    sortArray[sortTypes.getSelectedIndex()].sortStep();
+//                    sortArray[sortTypes.getSelectedIndex()].sortStep();
                 }
             });
             sortTimer.start();
@@ -566,12 +566,7 @@ public class Shell extends javax.swing.JFrame {
         
         private int index = 0;
         public void sortStep() {
-            //example sort
-            for (int i = index; i < data.length - 1; i++)
-                if (data[i] < data[i + 1])
-                    if (data[i + 1] > data[index])
-                        swapData(index, i + 1);
-            index++;
+//            sortArray[sortTypes.getSelectedIndex()].sortStep();
         }
 
         /**
