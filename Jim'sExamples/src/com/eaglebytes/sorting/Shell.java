@@ -21,10 +21,16 @@ import javax.swing.Timer;
 public class Shell extends javax.swing.JFrame {
 
     private int[] data;
+    private Object[] sortArray;
 
     public Shell() {
         initComponents();
         pack();
+        BubbleSort bubble = new BubbleSort();
+        QuickSort quick = new QuickSort();
+        PartitionSort partition = new PartitionSort();
+        ShellSort shell = new ShellSort();
+        sortArray = new Object[]{bubble, quick, partition, shell};
         setSize(1065, 720);
         setLocationRelativeTo(null);
         ((Panel) renderPanel).preInit();
@@ -56,6 +62,7 @@ public class Shell extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jSlider1 = new javax.swing.JSlider();
+        sortTypes = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Shell");
@@ -299,6 +306,8 @@ public class Shell extends javax.swing.JFrame {
             }
         });
 
+        sortTypes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bubble Sort", "Quick Sort", "Partition Sort", "Shell Sort" }));
+
         javax.swing.GroupLayout dataGenPanelLayout = new javax.swing.GroupLayout(dataGenPanel);
         dataGenPanel.setLayout(dataGenPanelLayout);
         dataGenPanelLayout.setHorizontalGroup(
@@ -306,21 +315,23 @@ public class Shell extends javax.swing.JFrame {
             .addGroup(dataGenPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(dataGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dataGenPanelLayout.createSequentialGroup()
-                        .addGroup(dataGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(minMaxPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataGenPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(dataGenLabel)
                         .addGap(64, 64, 64))
+                    .addGroup(dataGenPanelLayout.createSequentialGroup()
+                        .addGroup(dataGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(minMaxPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(dataGenPanelLayout.createSequentialGroup()
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2)))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataGenPanelLayout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(sortTypes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         dataGenPanelLayout.setVerticalGroup(
@@ -333,12 +344,13 @@ public class Shell extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(dataGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(dataGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)
-                        .addComponent(jButton3))
-                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(sortTypes, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(dataGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton2))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -542,21 +554,11 @@ public class Shell extends javax.swing.JFrame {
             if(sortTimer != null)
                 sortTimer.stop();
             sortTimer = new Timer(sortSpeed, new ActionListener() {
-                int index = 0;
+                
 
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    if (index > data.length - 1)
-                        ((Timer) ae.getSource()).stop();
-//                    selectDataIndex(index);
-//                    selectDataIndex(index+1);
-                    repaint();
-                    for (int i = index; i < data.length - 1; i++){
-                        if (data[i] < data[i + 1])
-                            if (data[i + 1] > data[index])
-                                swapData(index, i + 1);
-                    }
-                    index++;
+                    sortArray[sortTypes.getSelectedIndex()].sortStep();
                 }
             });
             sortTimer.start();
@@ -843,5 +845,6 @@ public class Shell extends javax.swing.JFrame {
     private javax.swing.JSlider minValueSlider;
     private javax.swing.JPanel renderPanel;
     private javax.swing.JButton sequentialButton;
+    private javax.swing.JComboBox sortTypes;
     // End of variables declaration//GEN-END:variables
 }
