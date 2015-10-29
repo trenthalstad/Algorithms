@@ -1,4 +1,4 @@
-//DIeter is awesome and Trent is Okay and Dan is also okay.
+//Seth is the best tho
 package com.eaglebytes.sorting;
 
 public class QuickSort implements Sort{
