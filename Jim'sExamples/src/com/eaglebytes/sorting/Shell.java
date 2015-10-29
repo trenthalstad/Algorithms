@@ -229,8 +229,9 @@ public class Shell extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 13)); // NOI18N
         jLabel1.setText("Number of Elements");
 
-        elementsSlider.setMajorTickSpacing(25);
-        elementsSlider.setMinorTickSpacing(10);
+        elementsSlider.setMajorTickSpacing(355);
+        elementsSlider.setMaximum(710);
+        elementsSlider.setMinorTickSpacing(150);
         elementsSlider.setPaintLabels(true);
         elementsSlider.setPaintTicks(true);
         elementsSlider.setValue(10);
@@ -433,6 +434,18 @@ public class Shell extends javax.swing.JFrame {
     }//GEN-LAST:event_elementsFieldMousePressed
 
     private void sequentialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sequentialButtonActionPerformed
+//        try {
+//            ((Panel)renderPanel).index = 0;
+//            int indices = Integer.parseInt(elementsField.getText());
+//            data = new int[indices];
+//            for (int i = 0; i < indices; i++)
+//                data[i] = (int) (600*Math.abs(Math.sin(Math.toRadians(4*360*i/data.length))));
+//            ((Panel) renderPanel).data = data;
+//            ((Panel) renderPanel).init();
+//        } catch (Exception e) {
+//            System.err.println(e);
+//        }
+//        
         try {
             ((Panel)renderPanel).index = 0;
             int indices = Integer.parseInt(elementsField.getText());
@@ -715,7 +728,7 @@ public class Shell extends javax.swing.JFrame {
         private int getDataIndexFromCoord(Vector2f coordinate) {
             for (int i = 0; i < data.length; i++) {
                 int xPos = (int) (i * 800f / (9 / 8f * data.length)) + (int) dataOffset.get(i).x;
-                int yPos = 673 - data[i] + (int) dataOffset.get(i).y;
+                int yPos = 680 - data[i] + (int) dataOffset.get(i).y;
                 int width = (int) (800f / (9 / 8f * data.length));
                 int height = data[i];
                 if (coordinate.x > xPos && coordinate.x < xPos + width && coordinate.y > yPos && coordinate.y < yPos + height)
@@ -725,7 +738,7 @@ public class Shell extends javax.swing.JFrame {
         }
 
         private Vector2f getCoordsFromDataIndex(int index) {
-            return new Vector2f((int) (index * 800f / (9 / 8f * data.length)) + (int) dataOffset.get(index).x, 673 - data[index] + (int) dataOffset.get(index).y);
+            return new Vector2f((int) (index * 800f / (9 / 8f * data.length)) + (int) dataOffset.get(index).x, 680 - data[index] + (int) dataOffset.get(index).y);
         }
 
         @Override
@@ -743,7 +756,7 @@ public class Shell extends javax.swing.JFrame {
             if (data != null && colors != null) {
                 for (int i = 0; i < data.length; i++) {
                     int xPos = (int) (i * 800f / (9 / 8f * data.length)) + (int) dataOffset.get(i).x;
-                    int yPos = 673 - data[i] + (int) dataOffset.get(i).y;
+                    int yPos = 680 - data[i] + (int) dataOffset.get(i).y;
                     int width = (int) (800f / (9 / 8f * data.length));
                     int height = data[i];
                     if (i != selectedIndices[0] && i != selectedIndices[1]){
@@ -753,53 +766,53 @@ public class Shell extends javax.swing.JFrame {
                 }
                 for (int i = 0; i < data.length; i++) {
                     int xPos = (int) (i * 800f / (9 / 8f * data.length)) + (int) dataOffset.get(i).x;
-                    int yPos = 673 - data[i] + (int) dataOffset.get(i).y;
+                    int yPos = 680 - data[i] + (int) dataOffset.get(i).y;
                     int width = (int) (800f / (9 / 8f * data.length));
                     int height = data[i];
                     if (i == selectedIndices[0]) {
                         //Beam of light behind the data
-                        bg.setPaint(new GradientPaint(0, 0, new Color(255, 255, 100, 150), 0, 673, new Color(255, 255, 0, 100)));
+                        bg.setPaint(new GradientPaint(0, 0, new Color(255, 255, 100, 150), 0, 680, new Color(255, 255, 0, 100)));
                         bg.fillPolygon(new int[]{
                             xPos + (int) dataOffset.get(i).x,
                             (int) (xPos + (int) dataOffset.get(i).x + width),
                             (int) (xPos + (int) dataOffset.get(i).x + 3 / 2f * width),
                             (int) (xPos + (int) dataOffset.get(i).x - 1 / 2f * width)
-                        }, new int[]{0, 0, 673, 673}, 4);
+                        }, new int[]{0, 0, 680, 680}, 4);
 
                         //Data
                         bg.setColor(colors[i]);
                         bg.fill3DRect(xPos, yPos, width, height, true);
 
                         //Beam of light infront of the data
-                        bg.setPaint(new GradientPaint(0, 0, new Color(255, 255, 100, 100), 0, 673, new Color(255, 255, 0, 25)));
+                        bg.setPaint(new GradientPaint(0, 0, new Color(255, 255, 100, 100), 0, 680, new Color(255, 255, 0, 25)));
                         bg.fillPolygon(new int[]{
                             xPos + (int) dataOffset.get(i).x,
                             (int) (xPos + (int) dataOffset.get(i).x + width),
                             (int) (xPos + (int) dataOffset.get(i).x + 3 / 2f * width),
                             (int) (xPos + (int) dataOffset.get(i).x - 1 / 2f * width)
-                        }, new int[]{0, 0, 673, 673}, 4);
+                        }, new int[]{0, 0, 680, 680}, 4);
                     } else if (i == selectedIndices[1]) {
                         //Beam of light behind the data
-                        bg.setPaint(new GradientPaint(0, 0, new Color(255, 0, 255, 150), 0, 673, new Color(0, 0, 255, 100)));
+                        bg.setPaint(new GradientPaint(0, 0, new Color(255, 0, 255, 150), 0, 680, new Color(0, 0, 255, 100)));
                         bg.fillPolygon(new int[]{
                             xPos + (int) dataOffset.get(i).x,
                             (int) (xPos + (int) dataOffset.get(i).x + width),
                             (int) (xPos + (int) dataOffset.get(i).x + 3 / 2f * width),
                             (int) (xPos + (int) dataOffset.get(i).x - 1 / 2f * width)
-                        }, new int[]{0, 0, 673, 673}, 4);
+                        }, new int[]{0, 0, 680, 680}, 4);
 
                         //Data
                         bg.setColor(colors[i]);
                         bg.fill3DRect(xPos, yPos, width, height, true);
 
                         //Beam of light infront of the data
-                        bg.setPaint(new GradientPaint(0, 0, new Color(255, 0, 255, 100), 0, 673, new Color(0, 0, 255, 25)));
+                        bg.setPaint(new GradientPaint(0, 0, new Color(255, 0, 255, 100), 0, 680, new Color(0, 0, 255, 25)));
                         bg.fillPolygon(new int[]{
                             xPos + (int) dataOffset.get(i).x,
                             (int) (xPos + (int) dataOffset.get(i).x + width),
                             (int) (xPos + (int) dataOffset.get(i).x + 3 / 2f * width),
                             (int) (xPos + (int) dataOffset.get(i).x - 1 / 2f * width)
-                        }, new int[]{0, 0, 673, 673}, 4);
+                        }, new int[]{0, 0, 680, 680}, 4);
                     }
                 }
             }
@@ -808,7 +821,7 @@ public class Shell extends javax.swing.JFrame {
             //Draw the y-coordinate text
             g.setColor(Color.yellow);
             for (int i = 0; i <= 6; i++)
-                g.drawString("" + (100 * i), 20, 673 - (i * 100));
+                g.drawString("" + (100 * i), 20, 680 - (i * 100));
             g.drawString("Temp", 740, 20);
             g.drawLine(710, 30, 800, 30);
             //Draw the point intersection lines
