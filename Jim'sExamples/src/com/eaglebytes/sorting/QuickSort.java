@@ -8,12 +8,12 @@ public class QuickSort implements Sort{
     }
 
     @Override
-    public void sort(int[] data){
+    public int[] sort(int[] data){
         
     }
     
     @Override
-    public void sortStep(int[] data){
+    public int[] sortStep(int[] data){
         
     }
 
