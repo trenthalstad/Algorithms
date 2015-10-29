@@ -2,8 +2,8 @@ package com.eaglebytes.sorting;
 
 public interface Sort {
     
-    public void sort();
+    public void sort(int[] data);
     
-    public void sortStep();
+    public void sortStep(int[] data);
     
 }
