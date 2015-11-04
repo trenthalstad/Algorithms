@@ -14,6 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -58,11 +59,12 @@ public class Shell extends javax.swing.JFrame {
         generateButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         elementsSlider = new javax.swing.JSlider();
-        jButton1 = new javax.swing.JButton();
+        sortButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jSlider1 = new javax.swing.JSlider();
         sortTypes = new javax.swing.JComboBox();
+        animateSortButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Shell");
@@ -78,7 +80,7 @@ public class Shell extends javax.swing.JFrame {
         );
         renderPanelLayout.setVerticalGroup(
             renderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 694, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         dataGenPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -108,6 +110,11 @@ public class Shell extends javax.swing.JFrame {
         minTextField.setFont(new java.awt.Font("Comic Sans MS", 0, 13)); // NOI18N
         minTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         minTextField.setText("100");
+        minTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                minTextFieldActionPerformed(evt);
+            }
+        });
         minTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 minTextFieldKeyReleased(evt);
@@ -122,13 +129,15 @@ public class Shell extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(minValuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(minValuePanelLayout.createSequentialGroup()
-                        .addGroup(minValuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(minTextField)
-                            .addComponent(minValueSlider, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
+                        .addComponent(minValueSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, minValuePanelLayout.createSequentialGroup()
                         .addComponent(minValueLabel)
                         .addGap(25, 25, 25))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, minValuePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(minTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         minValuePanelLayout.setVerticalGroup(
             minValuePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,7 +145,7 @@ public class Shell extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(minValueLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(minValueSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(minValueSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(minTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -176,13 +185,15 @@ public class Shell extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(maxSliderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(maxSliderPanelLayout.createSequentialGroup()
-                        .addGroup(maxSliderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(maxTextField)
-                            .addComponent(maxValueSlider, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
+                        .addComponent(maxValueSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, maxSliderPanelLayout.createSequentialGroup()
                         .addComponent(maxValueLabel)
                         .addGap(25, 25, 25))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, maxSliderPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(maxTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         maxSliderPanelLayout.setVerticalGroup(
             maxSliderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -190,8 +201,8 @@ public class Shell extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(maxValueLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(maxValueSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(maxValueSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(maxTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -206,7 +217,7 @@ public class Shell extends javax.swing.JFrame {
 
         elementsField.setFont(new java.awt.Font("Comic Sans MS", 0, 13)); // NOI18N
         elementsField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        elementsField.setText("10");
+        elementsField.setText("710");
         elementsField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 elementsFieldMousePressed(evt);
@@ -234,7 +245,7 @@ public class Shell extends javax.swing.JFrame {
         elementsSlider.setMinorTickSpacing(150);
         elementsSlider.setPaintLabels(true);
         elementsSlider.setPaintTicks(true);
-        elementsSlider.setValue(10);
+        elementsSlider.setValue(710);
         elementsSlider.setPreferredSize(new java.awt.Dimension(100, 23));
         elementsSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -246,10 +257,6 @@ public class Shell extends javax.swing.JFrame {
         minMaxPanel.setLayout(minMaxPanelLayout);
         minMaxPanelLayout.setHorizontalGroup(
             minMaxPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, minMaxPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(27, 27, 27))
             .addGroup(minMaxPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(minMaxPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,45 +269,51 @@ public class Shell extends javax.swing.JFrame {
                     .addComponent(elementsField)
                     .addComponent(elementsSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, minMaxPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(35, 35, 35))
         );
         minMaxPanelLayout.setVerticalGroup(
             minMaxPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(minMaxPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(minMaxPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(minValuePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(maxSliderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(maxSliderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(minValuePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(2, 2, 2)
                 .addComponent(elementsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(elementsSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                .addComponent(elementsSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sequentialButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(generateButton)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Sort");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        sortButton.setText("Sort");
+        sortButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                sortButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText(">");
+        jButton2.setText("Step");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("<");
-
+        jSlider1.setMajorTickSpacing(150);
         jSlider1.setMaximum(300);
-        jSlider1.setValue(150);
+        jSlider1.setMinorTickSpacing(100);
+        jSlider1.setPaintLabels(true);
+        jSlider1.setPaintTicks(true);
+        jSlider1.setValue(0);
         jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSlider1StateChanged(evt);
@@ -308,6 +321,15 @@ public class Shell extends javax.swing.JFrame {
         });
 
         sortTypes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bubble Sort", "Quick Sort", "Partition Sort", "Shell Sort" }));
+
+        animateSortButton.setText("Animate");
+        animateSortButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                animateSortButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Animation Speed");
 
         javax.swing.GroupLayout dataGenPanelLayout = new javax.swing.GroupLayout(dataGenPanel);
         dataGenPanel.setLayout(dataGenPanelLayout);
@@ -320,37 +342,49 @@ public class Shell extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(dataGenLabel)
                         .addGap(64, 64, 64))
-                    .addGroup(dataGenPanelLayout.createSequentialGroup()
-                        .addGroup(dataGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(minMaxPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(dataGenPanelLayout.createSequentialGroup()
-                                .addComponent(jButton3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)))
-                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataGenPanelLayout.createSequentialGroup()
                         .addComponent(sortTypes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataGenPanelLayout.createSequentialGroup()
+                        .addComponent(minMaxPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(dataGenPanelLayout.createSequentialGroup()
+                        .addComponent(sortButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(animateSortButton, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(dataGenPanelLayout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jLabel2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataGenPanelLayout.createSequentialGroup()
+                        .addGroup(dataGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSlider1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
+
+        dataGenPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {animateSortButton, sortButton});
+
         dataGenPanelLayout.setVerticalGroup(
             dataGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dataGenPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(7, 7, 7)
                 .addComponent(dataGenLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(minMaxPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(sortTypes, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sortTypes, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(dataGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2))
+                .addGroup(dataGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sortButton)
+                    .addComponent(animateSortButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
                 .addContainerGap())
         );
 
@@ -370,7 +404,7 @@ public class Shell extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(renderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE)
+                    .addComponent(renderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
                     .addComponent(dataGenPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -380,7 +414,6 @@ public class Shell extends javax.swing.JFrame {
 
     private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
         try {
-            ((Panel)renderPanel).index = 0;
             int indices = Integer.parseInt(elementsField.getText());
             data = new int[indices];
             for (int i = 0; i < indices; i++)
@@ -447,11 +480,10 @@ public class Shell extends javax.swing.JFrame {
 //        }
 //        
         try {
-            ((Panel)renderPanel).index = 0;
             int indices = Integer.parseInt(elementsField.getText());
             data = new int[indices];
             for (int i = 0; i < indices; i++)
-                data[i] = (int) ((float) i * (maxValueSlider.getValue() - minValueSlider.getValue()) / (indices - 1) + minValueSlider.getValue());
+                data[i] = (int) (maxValueSlider.getValue()-(float) i * (maxValueSlider.getValue() - minValueSlider.getValue()) / (indices - 1));
             ((Panel) renderPanel).data = data;
             ((Panel) renderPanel).init();
         } catch (Exception e) {
@@ -473,17 +505,25 @@ public class Shell extends javax.swing.JFrame {
         elementsField.setText("" + elementsSlider.getValue());
     }//GEN-LAST:event_elementsSliderStateChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ((Panel)renderPanel).sort();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void sortButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortButtonActionPerformed
+        ((Panel) renderPanel).sort();
+    }//GEN-LAST:event_sortButtonActionPerformed
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
-        ((Panel)renderPanel).sortSpeed = jSlider1.getValue();
+        ((Panel) renderPanel).sortSpeed = jSlider1.getValue();
     }//GEN-LAST:event_jSlider1StateChanged
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ((Panel)renderPanel).sortStep();
+        ((Panel) renderPanel).sortStep();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void animateSortButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_animateSortButtonActionPerformed
+        ((Panel) renderPanel).animateSort();
+    }//GEN-LAST:event_animateSortButtonActionPerformed
+
+    private void minTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_minTextFieldActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -518,6 +558,7 @@ public class Shell extends javax.swing.JFrame {
     private class Panel extends JPanel {
 
         private int[] data;
+        @Deprecated//TODO:
         private int[] selectedIndices = new int[]{-1, -1};
         private Color[] colors;
 
@@ -525,7 +566,15 @@ public class Shell extends javax.swing.JFrame {
         private Graphics2D bg;
 
         private int mouseX, mouseY;
+        
+        @Deprecated//TODO:
         private int timerSpeed = 10;
+        
+        private int temp = 0;
+        private int tempIndex = 0;
+        
+        private final Color startColor = Color.cyan;
+        private final Color endColor = Color.blue;
 
         public Panel() {
             addMouseMotionListener(new MouseAdapter() {
@@ -536,51 +585,68 @@ public class Shell extends javax.swing.JFrame {
                     repaint();
                 }
             });
+            //TODO: Remove?
             addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(MouseEvent me) {
                     int index = getDataIndexFromCoord(new Vector2f(me.getX(), me.getY()));
 //                    if(index != -1)
-                        selectDataIndex(index);
-                    if(me.getButton() == MouseEvent.BUTTON3){
+                    selectDataIndex(index);
+                    if (me.getButton() == MouseEvent.BUTTON3)
                         //TODO: Slow down
                         //Note: The time here MUST match the time on the other timer.
-                        new javax.swing.Timer(timerSpeed, new ActionListener(){
+                        new javax.swing.Timer(timerSpeed, new ActionListener() {
                             private int index = 0;
+
                             @Override
-                            public void actionPerformed(ActionEvent ae){
+                            public void actionPerformed(ActionEvent ae) {
                                 selectDataIndex(index++);
-                                selectDataIndex(data.length-index);
-                                if(index > data.length-1)
-                                    ((Timer)ae.getSource()).stop();
+                                selectDataIndex(data.length - index);
+                                if (index > data.length - 1)
+                                    ((Timer) ae.getSource()).stop();
                             }
                         }).start();
-                    }
                 }
             });
         }
 
-        public int sortSpeed = 150;
-        Timer sortTimer;
+        public int sortSpeed = 0;
+        private Timer sortTimer;
+        
+        /**
+         * Instantly sorts the array with the selected sort method.
+         */
         public void sort() {
             ((Sort)(sortArray[sortTypes.getSelectedIndex()])).sort(data);
-            //example sort
-//            if(sortTimer != null)
-//                sortTimer.stop();
-//            sortTimer = new Timer(sortSpeed, new ActionListener() {
-//                
-//
-//                @Override
-//                public void actionPerformed(ActionEvent ae) {
-////                    sortArray[sortTypes.getSelectedIndex()].sortStep();
-//                }
-//            });
-//            sortTimer.start();
+            setShadeSequentially(startColor, endColor);
+            repaint();
         }
         
-        private int index = 0;
+        /**
+         * Sorts the array as an animation, with the selected sort method.
+         */
+        public void animateSort(){
+            ((Sort) (sortArray[sortTypes.getSelectedIndex()])).init(data);
+            if (sortTimer != null)
+                sortTimer.stop();
+            sortTimer = new Timer(sortSpeed, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    sortStep();
+                }
+            });
+            sortTimer.start();
+        }
+        
+        /**
+         * Sorts one step of the selected sort method.
+         */
         public void sortStep() {
-//            sortArray[sortTypes.getSelectedIndex()].sortStep();
+            ((Sort) sortArray[sortTypes.getSelectedIndex()]).sortStep(data);
+            temp = ((Sort) sortArray[sortTypes.getSelectedIndex()]).getTemp();
+            tempIndex = ((Sort) sortArray[sortTypes.getSelectedIndex()]).getTempIndex();
+            setShadeSequentially(startColor, endColor);
+            repaint();
         }
 
         /**
@@ -598,7 +664,13 @@ public class Shell extends javax.swing.JFrame {
             colors[index] = colors[destination];
             colors[destination] = tempColor;
         }
-
+        
+        /**
+         * Graphically and literally swaps two values in an array.
+         * @param index First value to swap.
+         * @param destination  Second value to swap.
+         */
+        @Deprecated
         public void swap(final int index, final int destination) {
             new Timer(20, new ActionListener() {
                 @Override
@@ -630,25 +702,32 @@ public class Shell extends javax.swing.JFrame {
         }
 
         private javax.swing.Timer animationTimer;
-
+        
+        /**
+         * Called when the panel is created, sets up essential assets for the graphics engine.
+         */
         public void preInit() {
             img = new BufferedImage(800, 680, BufferedImage.TYPE_INT_ARGB);
             bg = (Graphics2D) img.getGraphics();
             bg.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-//            bg.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);
             bg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         }
-
-        private float speed = 3f;
-
+        
+        //Used for the commented out code below.
+        //private float speed = 3f;
+        
+        /**
+         * Called each time data is generated, sets it up to be displayed.
+         */
         public void init() {
+            temp = 0;
             dataOffset.clear();
             for (int i : data)
                 dataOffset.add(new Vector2f(0, 0));
-//            setBlackAndWhite();
-//            setColorSequentially();
-            setShadeSequentially();
-            if(animationTimer != null)
+            setShadeSequentially(startColor, endColor);
+            //Animates the vertical changes of a piece of data being selected.
+            /*
+            if (animationTimer != null)
                 animationTimer.stop();
             animationTimer = new javax.swing.Timer(timerSpeed, new ActionListener() {
                 @Override
@@ -672,9 +751,17 @@ public class Shell extends javax.swing.JFrame {
                 }
             });
             animationTimer.start();
+            */
+            if (sortTimer != null)
+                sortTimer.stop();
+            ((Sort) (sortArray[sortTypes.getSelectedIndex()])).init(data);
             repaint();
         }
 
+        /**
+         * Sets the color of the data as a linear gradient from left(black) to right(white).
+         */
+        @Deprecated
         private void setBlackAndWhite() {
             colors = new Color[data.length];
             for (int i = 0; i < data.length; i++) {
@@ -683,12 +770,20 @@ public class Shell extends javax.swing.JFrame {
             }
         }
 
+        /**
+         * Sets the color of the data somehow, I don't remember anymore. Looks like its set randomly. Yeah.... definitely randomly.
+         */
+        @Deprecated
         private void setColor() {
             colors = new Color[data.length];
             for (int i = 0; i < data.length; i++)
                 colors[i] = new Color((float) Math.random(), (float) Math.random(), (float) Math.random());
         }
-
+        
+        /**
+         * Sets the color poorly based on the actual data value. Almost what we wanted.
+         */
+        @Deprecated
         private void setColorSequentially() {
             colors = new Color[data.length];
             int max = MathUtils.getMax(data);
@@ -699,17 +794,32 @@ public class Shell extends javax.swing.JFrame {
             }
         }
 
-        private void setShadeSequentially() {
+        /**
+         * Sets the color as a gradient between the start and end colors, based on the data value.
+         * @param start Start Color.
+         * @param end End Color.
+         */
+        private void setShadeSequentially(Color start, Color end) {
             colors = new Color[data.length];
             for (int i = 0; i < data.length; i++) {
                 int max = MathUtils.getMax(data);
                 int min = MathUtils.getMin(data);
                 float color = (float) (data[i] - min) / (max - min);
-                colors[i] = new Color(1 - color, color, color);
+                
+                int red = (int)interpolate(color, start.getRed(), end.getRed());
+                int green = (int)interpolate(color, start.getGreen(), end.getGreen());
+                int blue = (int)interpolate(color, start.getBlue(), end.getBlue());
+                colors[i] = new Color(red, green, blue);
             }
         }
-
+        
+        private float interpolate(float ratio, float value1, float value2){
+            return Math.abs((ratio * value1) + ((1 - ratio) * value2));
+        }
+        
+        @Deprecated
         private List<Vector2f> dataOffset = new ArrayList<Vector2f>();
+        @Deprecated
         private boolean firstSelection = false;
 
         public void selectDataIndex(int index) {
@@ -756,17 +866,17 @@ public class Shell extends javax.swing.JFrame {
             bg.fillRect(710, 0, 800, 720);
             if (data != null && colors != null) {
                 for (int i = 0; i < data.length; i++) {
-                    int xPos = (int) (i * 800f / (9 / 8f * data.length)) + (int) dataOffset.get(i).x;
+                    int xPos = (int) (i * 799f / (9f / 8f * data.length)) + (int) dataOffset.get(i).x;
                     int yPos = 680 - data[i] + (int) dataOffset.get(i).y;
                     int width = (int) (800f / (9 / 8f * data.length));
                     int height = data[i];
-                    if (i != selectedIndices[0] && i != selectedIndices[1]){
+                    if (i != selectedIndices[0] && i != selectedIndices[1]) {
                         bg.setColor(colors[i]);
                         bg.fill3DRect(xPos, yPos + (int) dataOffset.get(i).y, width, height, true);
                     }
                 }
                 for (int i = 0; i < data.length; i++) {
-                    int xPos = (int) (i * 800f / (9 / 8f * data.length)) + (int) dataOffset.get(i).x;
+                    int xPos = (int) (i * 799f / (9f / 8f * data.length)) + (int) dataOffset.get(i).x;
                     int yPos = 680 - data[i] + (int) dataOffset.get(i).y;
                     int width = (int) (800f / (9 / 8f * data.length));
                     int height = data[i];
@@ -825,6 +935,11 @@ public class Shell extends javax.swing.JFrame {
                 g.drawString("" + (100 * i), 20, 680 - (i * 100));
             g.drawString("Temp", 740, 20);
             g.drawLine(710, 30, 800, 30);
+            
+            //Draw temp element
+            g.setColor(colors[tempIndex]);
+            g.fill3DRect(735, 680-temp, 40, temp, true);
+            
             //Draw the point intersection lines
             g.setColor(Color.pink);
             g.drawLine(0, mouseY, 800, mouseY);
@@ -833,15 +948,15 @@ public class Shell extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton animateSortButton;
     private javax.swing.JLabel dataGenLabel;
     private javax.swing.JPanel dataGenPanel;
     private javax.swing.JTextField elementsField;
     private javax.swing.JSlider elementsSlider;
     private javax.swing.JButton generateButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JPanel maxSliderPanel;
     private javax.swing.JTextField maxTextField;
@@ -854,6 +969,7 @@ public class Shell extends javax.swing.JFrame {
     private javax.swing.JSlider minValueSlider;
     private javax.swing.JPanel renderPanel;
     private javax.swing.JButton sequentialButton;
+    private javax.swing.JButton sortButton;
     private javax.swing.JComboBox sortTypes;
     // End of variables declaration//GEN-END:variables
 }

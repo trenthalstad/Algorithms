@@ -7,11 +7,17 @@ public class QuickSort implements Sort{
         
     }
     
+    public int temp = 0;
+    
+    @Override
+    public void init(int[] data){
+        
+    }
+    
     public int theArray[];
     private int nElems;
     
      public void quickSort() {
-         System.out.println("www");
         recQuickSort(0, nElems - 1);
     }
     
@@ -52,10 +58,9 @@ public class QuickSort implements Sort{
         return leftPtr;                 // return pivot location
     } 
     
-    
     public void swap(int dex1, int dex2) // swap two elements
     {
-        int temp = theArray[dex1]; 
+        temp = theArray[dex1]; 
         System.out.println(temp);// A into temp
         theArray[dex1] = theArray[dex2];   // B into A
         theArray[dex2] = temp;             // temp into B
@@ -64,25 +69,24 @@ public class QuickSort implements Sort{
     @Override
     public int[] sort(int[] data){
         theArray = data;
-        System.out.println("w");
-//        for(int i = 0; i< data.length;i++){
-//            theArray[i] = data[i];
-//        }
-        
         nElems = theArray.length;
         quickSort();
-        
-        
-        
-        
-        
-        
         return theArray;
     }
     
     @Override
     public int[] sortStep(int[] data){
         return data;
+    }
+    
+    @Override
+    public int getTemp(){
+        return temp;
+    }
+    
+    @Override
+    public int getTempIndex(){
+        return 0;
     }
 
 }
