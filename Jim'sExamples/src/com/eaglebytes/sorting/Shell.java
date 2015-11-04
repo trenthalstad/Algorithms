@@ -83,7 +83,7 @@ public class Shell extends javax.swing.JFrame {
 
         dataGenPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        dataGenLabel.setFont(new java.awt.Font("Comic Sans MS", 0, 13)); // NOI18N
+        dataGenLabel.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
         dataGenLabel.setText("Data Generation");
 
         minMaxPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -105,9 +105,15 @@ public class Shell extends javax.swing.JFrame {
         minValueLabel.setFont(new java.awt.Font("Comic Sans MS", 0, 13)); // NOI18N
         minValueLabel.setText("Min");
 
-        minTextField.setFont(new java.awt.Font("Comic Sans MS", 0, 13)); // NOI18N
+        minTextField.setBackground(new java.awt.Color(255, 255, 204));
+        minTextField.setFont(new java.awt.Font("Comic Sans MS", 1, 13)); // NOI18N
         minTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         minTextField.setText("100");
+        minTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                minTextFieldActionPerformed(evt);
+            }
+        });
         minTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 minTextFieldKeyReleased(evt);
@@ -159,7 +165,8 @@ public class Shell extends javax.swing.JFrame {
         maxValueLabel.setFont(new java.awt.Font("Comic Sans MS", 0, 13)); // NOI18N
         maxValueLabel.setText("Max");
 
-        maxTextField.setFont(new java.awt.Font("Comic Sans MS", 0, 13)); // NOI18N
+        maxTextField.setBackground(new java.awt.Color(255, 255, 204));
+        maxTextField.setFont(new java.awt.Font("Comic Sans MS", 1, 13)); // NOI18N
         maxTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         maxTextField.setText("600");
         maxTextField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -204,7 +211,8 @@ public class Shell extends javax.swing.JFrame {
             }
         });
 
-        elementsField.setFont(new java.awt.Font("Comic Sans MS", 0, 13)); // NOI18N
+        elementsField.setBackground(new java.awt.Color(255, 255, 204));
+        elementsField.setFont(new java.awt.Font("Comic Sans MS", 1, 13)); // NOI18N
         elementsField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         elementsField.setText("10");
         elementsField.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -308,6 +316,11 @@ public class Shell extends javax.swing.JFrame {
         });
 
         sortTypes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bubble Sort", "Quick Sort", "Partition Sort", "Shell Sort" }));
+        sortTypes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortTypesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout dataGenPanelLayout = new javax.swing.GroupLayout(dataGenPanel);
         dataGenPanel.setLayout(dataGenPanelLayout);
@@ -484,6 +497,14 @@ public class Shell extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         ((Panel)renderPanel).sortStep();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void sortTypesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortTypesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sortTypesActionPerformed
+
+    private void minTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_minTextFieldActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
