@@ -563,18 +563,19 @@ public class Shell extends javax.swing.JFrame {
         public int sortSpeed = 150;
         Timer sortTimer;
         public void sort() {
+            ((Sort)(sortArray[sortTypes.getSelectedIndex()])).sort(data);
             //example sort
-            if(sortTimer != null)
-                sortTimer.stop();
-            sortTimer = new Timer(sortSpeed, new ActionListener() {
-                
-
-                @Override
-                public void actionPerformed(ActionEvent ae) {
-//                    sortArray[sortTypes.getSelectedIndex()].sortStep();
-                }
-            });
-            sortTimer.start();
+//            if(sortTimer != null)
+//                sortTimer.stop();
+//            sortTimer = new Timer(sortSpeed, new ActionListener() {
+//                
+//
+//                @Override
+//                public void actionPerformed(ActionEvent ae) {
+////                    sortArray[sortTypes.getSelectedIndex()].sortStep();
+//                }
+//            });
+//            sortTimer.start();
         }
         
         private int index = 0;
