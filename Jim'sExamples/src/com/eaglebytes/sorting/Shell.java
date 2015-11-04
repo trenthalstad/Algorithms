@@ -21,10 +21,16 @@ import javax.swing.Timer;
 public class Shell extends javax.swing.JFrame {
 
     private int[] data;
+    private Object[] sortArray;
 
     public Shell() {
         initComponents();
         pack();
+        BubbleSort bubble = new BubbleSort();
+        QuickSort quick = new QuickSort();
+        PartitionSort partition = new PartitionSort();
+        ShellSort shell = new ShellSort();
+        sortArray = new Object[]{bubble, quick, partition, shell};
         setSize(1065, 720);
         setLocationRelativeTo(null);
         ((Panel) renderPanel).preInit();
@@ -56,6 +62,7 @@ public class Shell extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jSlider1 = new javax.swing.JSlider();
+        sortTypes = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Shell");
@@ -222,8 +229,9 @@ public class Shell extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 13)); // NOI18N
         jLabel1.setText("Number of Elements");
 
-        elementsSlider.setMajorTickSpacing(25);
-        elementsSlider.setMinorTickSpacing(10);
+        elementsSlider.setMajorTickSpacing(355);
+        elementsSlider.setMaximum(710);
+        elementsSlider.setMinorTickSpacing(150);
         elementsSlider.setPaintLabels(true);
         elementsSlider.setPaintTicks(true);
         elementsSlider.setValue(10);
@@ -299,6 +307,8 @@ public class Shell extends javax.swing.JFrame {
             }
         });
 
+        sortTypes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Bubble Sort", "Quick Sort", "Partition Sort", "Shell Sort" }));
+
         javax.swing.GroupLayout dataGenPanelLayout = new javax.swing.GroupLayout(dataGenPanel);
         dataGenPanel.setLayout(dataGenPanelLayout);
         dataGenPanelLayout.setHorizontalGroup(
@@ -306,21 +316,23 @@ public class Shell extends javax.swing.JFrame {
             .addGroup(dataGenPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(dataGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(dataGenPanelLayout.createSequentialGroup()
-                        .addGroup(dataGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(minMaxPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataGenPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(dataGenLabel)
                         .addGap(64, 64, 64))
+                    .addGroup(dataGenPanelLayout.createSequentialGroup()
+                        .addGroup(dataGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(minMaxPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(dataGenPanelLayout.createSequentialGroup()
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2)))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataGenPanelLayout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(sortTypes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         dataGenPanelLayout.setVerticalGroup(
@@ -333,12 +345,13 @@ public class Shell extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(dataGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(dataGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)
-                        .addComponent(jButton3))
-                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(sortTypes, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(dataGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton2))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -421,6 +434,18 @@ public class Shell extends javax.swing.JFrame {
     }//GEN-LAST:event_elementsFieldMousePressed
 
     private void sequentialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sequentialButtonActionPerformed
+//        try {
+//            ((Panel)renderPanel).index = 0;
+//            int indices = Integer.parseInt(elementsField.getText());
+//            data = new int[indices];
+//            for (int i = 0; i < indices; i++)
+//                data[i] = (int) (600*Math.abs(Math.sin(Math.toRadians(4*360*i/data.length))));
+//            ((Panel) renderPanel).data = data;
+//            ((Panel) renderPanel).init();
+//        } catch (Exception e) {
+//            System.err.println(e);
+//        }
+//        
         try {
             ((Panel)renderPanel).index = 0;
             int indices = Integer.parseInt(elementsField.getText());
@@ -536,36 +561,26 @@ public class Shell extends javax.swing.JFrame {
         }
 
         public int sortSpeed = 150;
+        Timer sortTimer;
         public void sort() {
+            ((Sort)(sortArray[sortTypes.getSelectedIndex()])).sort(data);
             //example sort
-            new Timer(sortSpeed, new ActionListener() {
-                int index = 0;
-
-                @Override
-                public void actionPerformed(ActionEvent ae) {
-                    if (index > data.length - 1)
-                        ((Timer) ae.getSource()).stop();
-//                    selectDataIndex(index);
-//                    selectDataIndex(index+1);
-                    repaint();
-                    for (int i = index; i < data.length - 1; i++){
-                        if (data[i] < data[i + 1])
-                            if (data[i + 1] > data[index])
-                                swapData(index, i + 1);
-                    }
-                    index++;
-                }
-            }).start();
+//            if(sortTimer != null)
+//                sortTimer.stop();
+//            sortTimer = new Timer(sortSpeed, new ActionListener() {
+//                
+//
+//                @Override
+//                public void actionPerformed(ActionEvent ae) {
+////                    sortArray[sortTypes.getSelectedIndex()].sortStep();
+//                }
+//            });
+//            sortTimer.start();
         }
         
         private int index = 0;
         public void sortStep() {
-            //example sort
-            for (int i = index; i < data.length - 1; i++)
-                if (data[i] < data[i + 1])
-                    if (data[i + 1] > data[index])
-                        swapData(index, i + 1);
-            index++;
+//            sortArray[sortTypes.getSelectedIndex()].sortStep();
         }
 
         /**
@@ -633,7 +648,8 @@ public class Shell extends javax.swing.JFrame {
 //            setBlackAndWhite();
 //            setColorSequentially();
             setShadeSequentially();
-
+            if(animationTimer != null)
+                animationTimer.stop();
             animationTimer = new javax.swing.Timer(timerSpeed, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
@@ -713,7 +729,7 @@ public class Shell extends javax.swing.JFrame {
         private int getDataIndexFromCoord(Vector2f coordinate) {
             for (int i = 0; i < data.length; i++) {
                 int xPos = (int) (i * 800f / (9 / 8f * data.length)) + (int) dataOffset.get(i).x;
-                int yPos = 673 - data[i] + (int) dataOffset.get(i).y;
+                int yPos = 680 - data[i] + (int) dataOffset.get(i).y;
                 int width = (int) (800f / (9 / 8f * data.length));
                 int height = data[i];
                 if (coordinate.x > xPos && coordinate.x < xPos + width && coordinate.y > yPos && coordinate.y < yPos + height)
@@ -723,7 +739,7 @@ public class Shell extends javax.swing.JFrame {
         }
 
         private Vector2f getCoordsFromDataIndex(int index) {
-            return new Vector2f((int) (index * 800f / (9 / 8f * data.length)) + (int) dataOffset.get(index).x, 673 - data[index] + (int) dataOffset.get(index).y);
+            return new Vector2f((int) (index * 800f / (9 / 8f * data.length)) + (int) dataOffset.get(index).x, 680 - data[index] + (int) dataOffset.get(index).y);
         }
 
         @Override
@@ -741,7 +757,7 @@ public class Shell extends javax.swing.JFrame {
             if (data != null && colors != null) {
                 for (int i = 0; i < data.length; i++) {
                     int xPos = (int) (i * 800f / (9 / 8f * data.length)) + (int) dataOffset.get(i).x;
-                    int yPos = 673 - data[i] + (int) dataOffset.get(i).y;
+                    int yPos = 680 - data[i] + (int) dataOffset.get(i).y;
                     int width = (int) (800f / (9 / 8f * data.length));
                     int height = data[i];
                     if (i != selectedIndices[0] && i != selectedIndices[1]){
@@ -751,53 +767,53 @@ public class Shell extends javax.swing.JFrame {
                 }
                 for (int i = 0; i < data.length; i++) {
                     int xPos = (int) (i * 800f / (9 / 8f * data.length)) + (int) dataOffset.get(i).x;
-                    int yPos = 673 - data[i] + (int) dataOffset.get(i).y;
+                    int yPos = 680 - data[i] + (int) dataOffset.get(i).y;
                     int width = (int) (800f / (9 / 8f * data.length));
                     int height = data[i];
                     if (i == selectedIndices[0]) {
                         //Beam of light behind the data
-                        bg.setPaint(new GradientPaint(0, 0, new Color(255, 255, 100, 150), 0, 673, new Color(255, 255, 0, 100)));
+                        bg.setPaint(new GradientPaint(0, 0, new Color(255, 255, 100, 150), 0, 680, new Color(255, 255, 0, 100)));
                         bg.fillPolygon(new int[]{
                             xPos + (int) dataOffset.get(i).x,
                             (int) (xPos + (int) dataOffset.get(i).x + width),
                             (int) (xPos + (int) dataOffset.get(i).x + 3 / 2f * width),
                             (int) (xPos + (int) dataOffset.get(i).x - 1 / 2f * width)
-                        }, new int[]{0, 0, 673, 673}, 4);
+                        }, new int[]{0, 0, 680, 680}, 4);
 
                         //Data
                         bg.setColor(colors[i]);
                         bg.fill3DRect(xPos, yPos, width, height, true);
 
                         //Beam of light infront of the data
-                        bg.setPaint(new GradientPaint(0, 0, new Color(255, 255, 100, 100), 0, 673, new Color(255, 255, 0, 25)));
+                        bg.setPaint(new GradientPaint(0, 0, new Color(255, 255, 100, 100), 0, 680, new Color(255, 255, 0, 25)));
                         bg.fillPolygon(new int[]{
                             xPos + (int) dataOffset.get(i).x,
                             (int) (xPos + (int) dataOffset.get(i).x + width),
                             (int) (xPos + (int) dataOffset.get(i).x + 3 / 2f * width),
                             (int) (xPos + (int) dataOffset.get(i).x - 1 / 2f * width)
-                        }, new int[]{0, 0, 673, 673}, 4);
+                        }, new int[]{0, 0, 680, 680}, 4);
                     } else if (i == selectedIndices[1]) {
                         //Beam of light behind the data
-                        bg.setPaint(new GradientPaint(0, 0, new Color(255, 0, 255, 150), 0, 673, new Color(0, 0, 255, 100)));
+                        bg.setPaint(new GradientPaint(0, 0, new Color(255, 0, 255, 150), 0, 680, new Color(0, 0, 255, 100)));
                         bg.fillPolygon(new int[]{
                             xPos + (int) dataOffset.get(i).x,
                             (int) (xPos + (int) dataOffset.get(i).x + width),
                             (int) (xPos + (int) dataOffset.get(i).x + 3 / 2f * width),
                             (int) (xPos + (int) dataOffset.get(i).x - 1 / 2f * width)
-                        }, new int[]{0, 0, 673, 673}, 4);
+                        }, new int[]{0, 0, 680, 680}, 4);
 
                         //Data
                         bg.setColor(colors[i]);
                         bg.fill3DRect(xPos, yPos, width, height, true);
 
                         //Beam of light infront of the data
-                        bg.setPaint(new GradientPaint(0, 0, new Color(255, 0, 255, 100), 0, 673, new Color(0, 0, 255, 25)));
+                        bg.setPaint(new GradientPaint(0, 0, new Color(255, 0, 255, 100), 0, 680, new Color(0, 0, 255, 25)));
                         bg.fillPolygon(new int[]{
                             xPos + (int) dataOffset.get(i).x,
                             (int) (xPos + (int) dataOffset.get(i).x + width),
                             (int) (xPos + (int) dataOffset.get(i).x + 3 / 2f * width),
                             (int) (xPos + (int) dataOffset.get(i).x - 1 / 2f * width)
-                        }, new int[]{0, 0, 673, 673}, 4);
+                        }, new int[]{0, 0, 680, 680}, 4);
                     }
                 }
             }
@@ -806,7 +822,7 @@ public class Shell extends javax.swing.JFrame {
             //Draw the y-coordinate text
             g.setColor(Color.yellow);
             for (int i = 0; i <= 6; i++)
-                g.drawString("" + (100 * i), 20, 673 - (i * 100));
+                g.drawString("" + (100 * i), 20, 680 - (i * 100));
             g.drawString("Temp", 740, 20);
             g.drawLine(710, 30, 800, 30);
             //Draw the point intersection lines
@@ -838,5 +854,6 @@ public class Shell extends javax.swing.JFrame {
     private javax.swing.JSlider minValueSlider;
     private javax.swing.JPanel renderPanel;
     private javax.swing.JButton sequentialButton;
+    private javax.swing.JComboBox sortTypes;
     // End of variables declaration//GEN-END:variables
 }
