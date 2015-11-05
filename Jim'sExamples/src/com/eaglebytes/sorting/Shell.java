@@ -59,6 +59,7 @@ public class Shell extends javax.swing.JFrame {
         generateButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         elementsSlider = new javax.swing.JSlider();
+        jButton1 = new javax.swing.JButton();
         sortButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jSlider1 = new javax.swing.JSlider();
@@ -208,7 +209,7 @@ public class Shell extends javax.swing.JFrame {
         );
 
         sequentialButton.setFont(new java.awt.Font("Comic Sans MS", 0, 13)); // NOI18N
-        sequentialButton.setText("Generate Sequential");
+        sequentialButton.setText("Sequential");
         sequentialButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sequentialButtonActionPerformed(evt);
@@ -230,7 +231,7 @@ public class Shell extends javax.swing.JFrame {
         });
 
         generateButton.setFont(new java.awt.Font("Comic Sans MS", 0, 13)); // NOI18N
-        generateButton.setText("Generate Random");
+        generateButton.setText("Random");
         generateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 generateButtonActionPerformed(evt);
@@ -253,6 +254,13 @@ public class Shell extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Sine");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout minMaxPanelLayout = new javax.swing.GroupLayout(minMaxPanel);
         minMaxPanel.setLayout(minMaxPanelLayout);
         minMaxPanelLayout.setHorizontalGroup(
@@ -264,16 +272,22 @@ public class Shell extends javax.swing.JFrame {
                         .addComponent(minValuePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(maxSliderPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(generateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(sequentialButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(elementsField)
-                    .addComponent(elementsSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(elementsSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(minMaxPanelLayout.createSequentialGroup()
+                        .addComponent(generateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, minMaxPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(35, 35, 35))
         );
+
+        minMaxPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {generateButton, jButton1});
+
         minMaxPanelLayout.setVerticalGroup(
             minMaxPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(minMaxPanelLayout.createSequentialGroup()
@@ -290,9 +304,13 @@ public class Shell extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sequentialButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(generateButton)
+                .addGroup(minMaxPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(generateButton)
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        minMaxPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {generateButton, jButton1, sequentialButton});
 
         sortButton.setText("Sort");
         sortButton.addActionListener(new java.awt.event.ActionListener() {
@@ -308,8 +326,8 @@ public class Shell extends javax.swing.JFrame {
             }
         });
 
-        jSlider1.setMajorTickSpacing(150);
-        jSlider1.setMaximum(300);
+        jSlider1.setMajorTickSpacing(250);
+        jSlider1.setMaximum(1000);
         jSlider1.setMinorTickSpacing(100);
         jSlider1.setPaintLabels(true);
         jSlider1.setPaintTicks(true);
@@ -374,7 +392,7 @@ public class Shell extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(minMaxPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sortTypes, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                .addComponent(sortTypes, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(dataGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sortButton)
@@ -467,18 +485,6 @@ public class Shell extends javax.swing.JFrame {
     }//GEN-LAST:event_elementsFieldMousePressed
 
     private void sequentialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sequentialButtonActionPerformed
-//        try {
-//            ((Panel)renderPanel).index = 0;
-//            int indices = Integer.parseInt(elementsField.getText());
-//            data = new int[indices];
-//            for (int i = 0; i < indices; i++)
-//                data[i] = (int) (600*Math.abs(Math.sin(Math.toRadians(4*360*i/data.length))));
-//            ((Panel) renderPanel).data = data;
-//            ((Panel) renderPanel).init();
-//        } catch (Exception e) {
-//            System.err.println(e);
-//        }
-//        
         try {
             int indices = Integer.parseInt(elementsField.getText());
             data = new int[indices];
@@ -524,6 +530,21 @@ public class Shell extends javax.swing.JFrame {
     private void minTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_minTextFieldActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            int indices = Integer.parseInt(elementsField.getText());
+            data = new int[indices];
+            for (int i = 0; i < indices; i++)
+                data[i] = (int)(600f*Math.abs(Math.sin(Math.toRadians(1/2f*i/data.length*360))));
+//                data[i] = (int)((i-indices/2f)/15f*(i-indices/2f)/15f);
+//                data[i] = (int)(100f/Math.abs(Math.sin(Math.toRadians(20f*i/data.length*360f))));
+            ((Panel) renderPanel).data = data;
+            ((Panel) renderPanel).init();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -937,9 +958,10 @@ public class Shell extends javax.swing.JFrame {
             g.drawLine(710, 30, 800, 30);
             
             //Draw temp element
-            g.setColor(colors[tempIndex]);
-            g.fill3DRect(735, 680-temp, 40, temp, true);
-            
+            if(tempIndex < colors.length-1){
+                g.setColor(colors[tempIndex]);
+                g.fill3DRect(735, 680-temp, 40, temp, true);
+            }
             //Draw the point intersection lines
             g.setColor(Color.pink);
             g.drawLine(0, mouseY, 800, mouseY);
@@ -954,6 +976,7 @@ public class Shell extends javax.swing.JFrame {
     private javax.swing.JTextField elementsField;
     private javax.swing.JSlider elementsSlider;
     private javax.swing.JButton generateButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
