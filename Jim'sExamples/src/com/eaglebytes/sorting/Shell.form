@@ -129,7 +129,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="minMaxPanel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="sortTypes" pref="34" max="32767" attributes="0"/>
+                  <Component id="sortTypes" pref="33" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="sortButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -175,10 +175,14 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="maxSliderPanel" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="generateButton" alignment="0" max="32767" attributes="0"/>
                           <Component id="sequentialButton" alignment="0" max="32767" attributes="0"/>
                           <Component id="elementsField" alignment="0" max="32767" attributes="0"/>
                           <Component id="elementsSlider" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="generateButton" linkSize="7" min="-2" pref="91" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                              <Component id="jButton1" linkSize="7" min="-2" pref="74" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -204,9 +208,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="elementsSlider" pref="52" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="sequentialButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="sequentialButton" linkSize="4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="generateButton" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="generateButton" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton1" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -377,7 +384,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Comic Sans MS" size="13" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Generate Sequential"/>
+                <Property name="text" type="java.lang.String" value="Sequential"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sequentialButtonActionPerformed"/>
@@ -401,7 +408,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Comic Sans MS" size="13" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Generate Random"/>
+                <Property name="text" type="java.lang.String" value="Random"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="generateButtonActionPerformed"/>
@@ -431,6 +438,14 @@
                 <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="elementsSliderStateChanged"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JButton" name="jButton1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Sine"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JButton" name="sortButton">
@@ -451,8 +466,8 @@
         </Component>
         <Component class="javax.swing.JSlider" name="jSlider1">
           <Properties>
-            <Property name="majorTickSpacing" type="int" value="150"/>
-            <Property name="maximum" type="int" value="300"/>
+            <Property name="majorTickSpacing" type="int" value="250"/>
+            <Property name="maximum" type="int" value="1000"/>
             <Property name="minorTickSpacing" type="int" value="100"/>
             <Property name="paintLabels" type="boolean" value="true"/>
             <Property name="paintTicks" type="boolean" value="true"/>

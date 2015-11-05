@@ -1,18 +1,9 @@
-<<<<<<< HEAD
 /* Randal's original
 package com.eaglebytes.sorting;
 
 public class BubbleSort implements Sort
     {
 
-=======
-
-package com.eaglebytes.sorting;
-
-public class BubbleSort implements Sort
-    {
-
->>>>>>> refs/remotes/origin/master
                   
     private int nElems;  
     
@@ -54,7 +45,6 @@ public class BubbleSort implements Sort
         
     }
         return data;
-<<<<<<< HEAD
     }
     
     @Override
@@ -126,14 +116,6 @@ public class BubbleSort implements Sort {
     @Override
     public int getTempIndex(){
         return tempIndex;
-=======
->>>>>>> refs/remotes/origin/master
     }
     
-    @Override
-    public int[] sortStep(int[] data)
-    {
-        return data;
-    }
-
 }
