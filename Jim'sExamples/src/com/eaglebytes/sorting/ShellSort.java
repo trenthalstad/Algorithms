@@ -5,11 +5,15 @@ public class ShellSort implements Sort{
 
          
     public int nElems;
+        private int index = 0;
+    int[] SortData;
+    private Color[] colors;
     
     @Override
     public int[] sort(int[] data){
           int inner, outer;
         int temp;
+        SortData = data;
 
         nElems = data.length;
         
@@ -38,10 +42,25 @@ public class ShellSort implements Sort{
     
     @Override
     public int[] sortStep(int[] data){
-         
-        return data;
+                              for (int i = index; i < SortData.length - 1; i++)
+                if (SortData[i] < SortData[i + 1])
+                    if (SortData[i + 1] > SortData[index])
+                        swapData(index, i + 1);
+            index++;
+        return SortData;
+
+       
 
 }
+            public void swapData(int index, int destination) {
+            int temp = SortData[index];
+            SortData[index] = SortData[destination];
+            SortData[destination] = temp;
+            //TODO: Not necessary if color based on length.
+            Color tempColor = colors[index];
+            colors[index] = colors[destination];
+            colors[destination] = tempColor;
+        }
     
     @Override
     public int getTemp(){
