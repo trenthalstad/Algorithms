@@ -1,13 +1,21 @@
 
 package com.eaglebytes.sorting;
 
+import java.awt.Color;
+
 public class ShellSort implements Sort{
 
          
     public int nElems;
-        private int index = 0;
+    private int index = 0;
     int[] SortData;
     private Color[] colors;
+    
+    @Override
+    public void init(int[] data){
+        SortData = data;
+        index = 0;
+    }
     
     @Override
     public int[] sort(int[] data){
@@ -42,11 +50,12 @@ public class ShellSort implements Sort{
     
     @Override
     public int[] sortStep(int[] data){
-                              for (int i = index; i < SortData.length - 1; i++)
-                if (SortData[i] < SortData[i + 1])
-                    if (SortData[i + 1] > SortData[index])
-                        swapData(index, i + 1);
-            index++;
+        SortData = data;
+        for (int i = index; i < data.length - 1; i++)
+            if (SortData[i] < SortData[i + 1])
+                if (SortData[i + 1] > SortData[index])
+                    swapData(index, i + 1);
+        index++;
         return SortData;
 
        
@@ -57,14 +66,14 @@ public class ShellSort implements Sort{
             SortData[index] = SortData[destination];
             SortData[destination] = temp;
             //TODO: Not necessary if color based on length.
-            Color tempColor = colors[index];
-            colors[index] = colors[destination];
-            colors[destination] = tempColor;
+           // Color tempColor = colors[index];
+            //colors[index] = colors[destination];
+           // colors[destination] = tempColor;
         }
     
     @Override
     public int getTemp(){
-        return temp;
+        return 0;
     }
     
     @Override
