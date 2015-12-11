@@ -11,18 +11,25 @@ public class QuickSort implements Sort{
     
     @Override
     public void init(int[] data){
-        
+        left = 0;
+        right = data.length-1;
+        iterations = right-left;
     }
     
     public int theArray[];
     private int nElems;
     
      public void quickSort() {
+         iterations--;
         recQuickSort(0, nElems - 1);
+        
     }
     
+     private int iterations = 0;
+     
     public void recQuickSort(int left, int right) {
-        if (right - left <= 0) // if size <= 1,
+        System.out.println(iterations);
+        if (right - left <= iterations) // if size <= 1,
         {
             return;                      //    already sorted
         } else // size is 2 or larger
@@ -74,8 +81,17 @@ public class QuickSort implements Sort{
         return theArray;
     }
     
+    private int left, right;
+    
     @Override
     public int[] sortStep(int[] data){
+        
+        long pivot = theArray[right];      // rightmost item
+        // partition range
+        int partition = partitionIt(left, right, pivot);
+        
+        
+        
         return data;
     }
     
