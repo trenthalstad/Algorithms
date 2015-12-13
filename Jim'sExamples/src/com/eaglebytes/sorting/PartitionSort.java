@@ -33,4 +33,9 @@ public class PartitionSort implements Sort {
     public int getTempIndex(){
         return 0;
     }
+    
+    @Override
+    public int getTempIndex2(){
+        return 0;
+    }
 }

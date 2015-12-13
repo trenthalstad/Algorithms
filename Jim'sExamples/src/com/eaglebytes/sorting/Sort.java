@@ -12,4 +12,6 @@ public interface Sort {
     
     public int getTempIndex();
     
+    public int getTempIndex2();
+    
 }

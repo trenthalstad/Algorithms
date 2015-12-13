@@ -118,4 +118,9 @@ public class BubbleSort implements Sort {
         return tempIndex;
     }
     
+    @Override
+    public int getTempIndex2(){
+        return 0;
+    }
+    
 }

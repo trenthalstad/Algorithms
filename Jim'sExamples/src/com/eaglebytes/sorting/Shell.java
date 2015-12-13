@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -32,7 +33,7 @@ public class Shell extends javax.swing.JFrame {
         PartitionSort partition = new PartitionSort();
         ShellSort shell = new ShellSort();
         sortArray = new Object[]{bubble, quick, partition, shell};
-        setSize(1065, 720);
+        setSize(1065, 750);
         setLocationRelativeTo(null);
         ((Panel) renderPanel).preInit();
         sequentialButton.doClick();
@@ -66,6 +67,11 @@ public class Shell extends javax.swing.JFrame {
         sortTypes = new javax.swing.JComboBox();
         animateSortButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Shell");
@@ -392,7 +398,7 @@ public class Shell extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(minMaxPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sortTypes, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                .addComponent(sortTypes, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(dataGenPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sortButton)
@@ -405,6 +411,34 @@ public class Shell extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addContainerGap())
         );
+
+        jMenu1.setText("File");
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
+        jMenuItem2.setText("Exit");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Help");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("About");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -422,7 +456,7 @@ public class Shell extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(renderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
+                    .addComponent(renderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 687, Short.MAX_VALUE)
                     .addComponent(dataGenPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -546,6 +580,14 @@ public class Shell extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        JOptionPane.showMessageDialog(this, "Made in 2015\nDeveloped By:\n\nDaniel Church\nDieter Grosswiler\nSeth Probert\nTrent Halstad\nNathan Starkel\nRandall Deffert", "Credits", WIDTH);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -666,6 +708,8 @@ public class Shell extends javax.swing.JFrame {
             ((Sort) sortArray[sortTypes.getSelectedIndex()]).sortStep(data);
             temp = ((Sort) sortArray[sortTypes.getSelectedIndex()]).getTemp();
             tempIndex = ((Sort) sortArray[sortTypes.getSelectedIndex()]).getTempIndex();
+            selectDataIndex(tempIndex);
+            selectDataIndex(((Sort) sortArray[sortTypes.getSelectedIndex()]).getTempIndex2());
             setShadeSequentially(startColor, endColor);
             repaint();
         }
@@ -728,7 +772,7 @@ public class Shell extends javax.swing.JFrame {
          * Called when the panel is created, sets up essential assets for the graphics engine.
          */
         public void preInit() {
-            img = new BufferedImage(800, 680, BufferedImage.TYPE_INT_ARGB);
+            img = new BufferedImage(800, 700, BufferedImage.TYPE_INT_ARGB);
             bg = (Graphics2D) img.getGraphics();
             bg.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
             bg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -882,13 +926,13 @@ public class Shell extends javax.swing.JFrame {
             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             //Draw Elements onto a backbuffer
             bg.setColor(Color.black);
-            bg.fillRect(0, 0, 800, 720);
+            bg.fillRect(0, 0, 800, 700);
             bg.setColor(Color.DARK_GRAY);
-            bg.fillRect(710, 0, 800, 720);
+            bg.fillRect(710, 0, 800, 700);
             if (data != null && colors != null) {
                 for (int i = 0; i < data.length; i++) {
                     int xPos = (int) (i * 799f / (9f / 8f * data.length)) + (int) dataOffset.get(i).x;
-                    int yPos = 680 - data[i] + (int) dataOffset.get(i).y;
+                    int yPos = 700 - data[i] + (int) dataOffset.get(i).y;
                     int width = (int) (800f / (9 / 8f * data.length));
                     int height = data[i];
                     if (i != selectedIndices[0] && i != selectedIndices[1]) {
@@ -898,7 +942,7 @@ public class Shell extends javax.swing.JFrame {
                 }
                 for (int i = 0; i < data.length; i++) {
                     int xPos = (int) (i * 799f / (9f / 8f * data.length)) + (int) dataOffset.get(i).x;
-                    int yPos = 680 - data[i] + (int) dataOffset.get(i).y;
+                    int yPos = 700 - data[i] + (int) dataOffset.get(i).y;
                     int width = (int) (800f / (9 / 8f * data.length));
                     int height = data[i];
                     if (i == selectedIndices[0]) {
@@ -953,14 +997,14 @@ public class Shell extends javax.swing.JFrame {
             //Draw the y-coordinate text
             g.setColor(Color.yellow);
             for (int i = 0; i <= 6; i++)
-                g.drawString("" + (100 * i), 20, 680 - (i * 100));
+                g.drawString("" + (100 * i), 20, 700 - (i * 100));
             g.drawString("Temp", 740, 20);
             g.drawLine(710, 30, 800, 30);
             
             //Draw temp element
             if(tempIndex < colors.length-1){
                 g.setColor(colors[tempIndex]);
-                g.fill3DRect(735, 680-temp, 40, temp, true);
+                g.fill3DRect(735, 700-temp, 40, temp, true);
             }
             //Draw the point intersection lines
             g.setColor(Color.pink);
@@ -980,6 +1024,11 @@ public class Shell extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JSlider jSlider1;
     private javax.swing.JPanel maxSliderPanel;
     private javax.swing.JTextField maxTextField;
