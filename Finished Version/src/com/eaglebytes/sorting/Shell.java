@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -581,7 +582,7 @@ public class Shell extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        JOptionPane.showMessageDialog(this, "Made in 2015\nDeveloped By:\n\nDaniel Church\nDieter Grosswiler\nSeth Probert\nTrent Halstad\nNathan Starkel\nRandall Deffert", "Credits", WIDTH);
+        JOptionPane.showMessageDialog(this, "Made in 2015\nDeveloped By Eagle Bytes:\n\nDaniel Church\nDieter Grosswiler\nSeth Probert\nTrent Halstad\nNathan Starkel\nRandall Deffert", "Credits", 0, new ImageIcon("res/eagle.png"));
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
